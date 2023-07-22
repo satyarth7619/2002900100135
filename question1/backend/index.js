@@ -38,7 +38,7 @@ app.get("/numbers", (req, res) => {
       let result = [...ansArray[0], ...ansArray[1]];
       result = [...new Set(result)];
       console.log(result);
-      res.json(result);
+      res.status(200).json(result);
     }
   };
   testApi(queries);

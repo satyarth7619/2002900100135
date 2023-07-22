@@ -24,5 +24,9 @@ const sendReq = async () => {
   };
   const res = await fetch(URL,head);
   const result = await res.json();
-  alert(result);
+  if(res.status===200){
+    alert(result);
+  }else{
+    alert("Enter urls using comma and space");
+  }
 };
