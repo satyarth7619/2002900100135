@@ -23,4 +23,6 @@ const sendReq = async () => {
     },
   };
   const res = await fetch(URL,head);
+  const result = await res.json();
+  alert(result);
 };

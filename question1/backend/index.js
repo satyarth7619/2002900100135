@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const send = require("send");
 
 const app = express();
 
@@ -11,11 +12,15 @@ app.listen(8000, () => {
 });
 
 app.get("/numbers", (req, res) => {
-    let queries = {
-        url:[]
-    }
+  let queries = {
+    url: [],
+  };
+
+  var ansArray = [];
+
   queries = req.query;
-  console.log(queries);
+
+  console.log(queries.url);
 
   const testApi = async (queries) => {
     const head = {
@@ -24,10 +29,17 @@ app.get("/numbers", (req, res) => {
         "Content-Type": "application/json",
       },
     };
-
-    queries.url.forEach(async (element) => {
-      console.log("hello");
-    });
+    if (queries.url.length > 0) {
+      for (let i = 0; i < queries.url.length; i++) {
+        const result = await fetch(queries.url[i], head);
+        const ans = await result.json();
+        ansArray[i] = ans.numbers;
+      }
+      let result = [...ansArray[0], ...ansArray[1]];
+      result = [...new Set(result)];
+      console.log(result);
+      res.json(result);
+    }
   };
-  testApi();
+  testApi(queries);
 });
