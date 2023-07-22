@@ -14,7 +14,7 @@ const sendReq = async () => {
     newQuery = "url" + param[0];
   }
 
-  const URL = "http://localhost:8000/numbers?" + newQuery;
+  const URL = "http://localhost:8008/numbers?" + newQuery;
   console.log(URL)
   const head = {
     method: "GET",
@@ -24,7 +24,7 @@ const sendReq = async () => {
   };
   const res = await fetch(URL,head);
   const result = await res.json();
-  if(res.status===200){
+  if(res.status === 200){
     alert(result);
   }else{
     alert("Enter urls using comma and space");
